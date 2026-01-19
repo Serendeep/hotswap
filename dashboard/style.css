@@ -1,0 +1,410 @@
+/* CSS Variables */
+:root {
+    --bg-primary: #1a1a2e;
+    --bg-secondary: #16213e;
+    --bg-card: #0f3460;
+    --text-primary: #eee;
+    --text-secondary: #aaa;
+    --accent: #e94560;
+    --success: #4ade80;
+    --warning: #fbbf24;
+    --info: #60a5fa;
+    --border-radius: 8px;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+/* Header */
+header {
+    background: var(--bg-secondary);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+header h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+/* Connection Status */
+.status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.status-indicator .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+}
+
+.status-indicator.connected .dot {
+    background: var(--success);
+}
+
+.status-indicator.connected .text {
+    color: var(--success);
+}
+
+/* Main Content */
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Cards Section */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.card {
+    background: var(--bg-card);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+}
+
+.card h3 {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 0.5rem;
+}
+
+.card-content {
+    min-height: 100px;
+}
+
+.model-version {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--info);
+}
+
+.model-id {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    word-break: break-all;
+    margin-bottom: 1rem;
+}
+
+.stat {
+    font-size: 0.9rem;
+}
+
+.stat .label {
+    color: var(--text-secondary);
+}
+
+.card-footer {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    gap: 0.5rem;
+}
+
+/* Shadow Card States */
+#shadow-model-card.active {
+    border: 2px solid var(--warning);
+}
+
+#shadow-model-card.active .model-version {
+    color: var(--warning);
+}
+
+/* Training Card */
+#training-card.active {
+    border: 2px solid var(--info);
+}
+
+#training-status {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.progress-bar {
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 1rem 0;
+}
+
+.progress {
+    height: 100%;
+    background: var(--info);
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
+#training-details {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+/* Metrics Section */
+.metrics-section {
+    background: var(--bg-card);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    border: 2px solid var(--warning);
+}
+
+.metrics-section h2 {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 1rem;
+}
+
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.metric {
+    text-align: center;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--border-radius);
+}
+
+.metric-value {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--info);
+}
+
+.metric-label {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-top: 0.25rem;
+}
+
+.decision-box {
+    text-align: center;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--border-radius);
+}
+
+.decision {
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.decision.promote { color: var(--success); }
+.decision.rollback { color: var(--accent); }
+.decision.wait { color: var(--warning); }
+.decision.manual { color: var(--info); }
+
+/* History Section */
+.history-section {
+    background: var(--bg-card);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.history-section h2 {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 1rem;
+}
+
+.table-container {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+th {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-secondary);
+}
+
+td {
+    font-size: 0.9rem;
+}
+
+tr:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.loading {
+    text-align: center;
+    color: var(--text-secondary);
+    padding: 2rem;
+}
+
+/* Status Badges */
+.status-badge {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.status-badge.active { background: var(--success); color: #000; }
+.status-badge.shadow { background: var(--warning); color: #000; }
+.status-badge.ready { background: var(--info); color: #000; }
+.status-badge.training { background: #a78bfa; color: #000; }
+.status-badge.archived { background: #6b7280; color: #fff; }
+
+/* Controls Section */
+.controls-section {
+    background: var(--bg-card);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+}
+
+.controls-section h2 {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 1rem;
+}
+
+.control-group {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.control-group label {
+    font-size: 0.9rem;
+}
+
+select {
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    min-width: 200px;
+}
+
+/* Buttons */
+.btn {
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius);
+    border: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn-primary {
+    background: var(--info);
+    color: #000;
+}
+
+.btn-success {
+    background: var(--success);
+    color: #000;
+}
+
+.btn-danger {
+    background: var(--accent);
+    color: #fff;
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+}
+
+.btn-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    main {
+        padding: 1rem;
+    }
+
+    .control-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    select {
+        min-width: 100%;
+    }
+}

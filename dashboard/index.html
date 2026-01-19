@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotswap ML Dashboard</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <header>
+        <h1>Hotswap ML Dashboard</h1>
+        <div id="connection-status" class="status-indicator disconnected">
+            <span class="dot"></span>
+            <span class="text">Disconnected</span>
+        </div>
+    </header>
+
+    <main>
+        <!-- Status Cards -->
+        <section class="cards">
+            <div class="card" id="active-model-card">
+                <h3>Active Model</h3>
+                <div class="card-content">
+                    <div class="model-version" id="active-version">--</div>
+                    <div class="model-id" id="active-id">No active model</div>
+                    <div class="stat">
+                        <span class="label">Predictions:</span>
+                        <span id="prediction-count">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" id="shadow-model-card">
+                <h3>Shadow Model</h3>
+                <div class="card-content">
+                    <div class="model-version" id="shadow-version">--</div>
+                    <div class="model-id" id="shadow-id">No shadow model</div>
+                    <div class="stat" id="shadow-stats">
+                        <span class="label">Agreement:</span>
+                        <span id="agreement-rate">--</span>
+                    </div>
+                </div>
+                <div class="card-footer" id="shadow-controls" style="display: none;">
+                    <button class="btn btn-success" onclick="promoteShadow()">Promote</button>
+                    <button class="btn btn-danger" onclick="cancelShadow()">Cancel</button>
+                </div>
+            </div>
+
+            <div class="card" id="training-card">
+                <h3>Training</h3>
+                <div class="card-content">
+                    <div id="training-status">Idle</div>
+                    <div class="progress-bar" id="training-progress-container" style="display: none;">
+                        <div class="progress" id="training-progress"></div>
+                    </div>
+                    <div id="training-details"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Shadow Mode Metrics -->
+        <section class="metrics-section" id="shadow-metrics-section" style="display: none;">
+            <h2>Shadow Mode Metrics</h2>
+            <div class="metrics-grid">
+                <div class="metric">
+                    <span class="metric-value" id="metric-samples">0</span>
+                    <span class="metric-label">Samples</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-value" id="metric-agreement">0%</span>
+                    <span class="metric-label">Agreement Rate</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-value" id="metric-latency-active">0ms</span>
+                    <span class="metric-label">Avg Active Latency</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-value" id="metric-latency-shadow">0ms</span>
+                    <span class="metric-label">Avg Shadow Latency</span>
+                </div>
+            </div>
+            <div class="decision-box">
+                <span class="label">Decision:</span>
+                <span id="decision-text" class="decision">--</span>
+            </div>
+        </section>
+
+        <!-- Model History -->
+        <section class="history-section">
+            <h2>Model History</h2>
+            <div class="table-container">
+                <table id="models-table">
+                    <thead>
+                        <tr>
+                            <th>Version</th>
+                            <th>Status</th>
+                            <th>Created</th>
+                            <th>Loss</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="models-tbody">
+                        <tr>
+                            <td colspan="5" class="loading">Loading models...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Manual Controls -->
+        <section class="controls-section">
+            <h2>Manual Controls</h2>
+            <div class="control-group">
+                <label for="shadow-model-select">Start Shadow Mode:</label>
+                <select id="shadow-model-select">
+                    <option value="">Select a model...</option>
+                </select>
+                <button class="btn btn-primary" onclick="startShadow()">Start Shadow</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Hotswap ML v0.1.0</p>
+    </footer>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>

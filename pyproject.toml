@@ -1,0 +1,37 @@
+[project]
+name = "hotswap"
+version = "0.1.0"
+description = "Hotswappable ML model system with shadow mode validation"
+requires-python = ">=3.10"
+dependencies = [
+    "torch>=2.0.0",
+    "fastapi>=0.100.0",
+    "uvicorn>=0.23.0",
+    "watchdog>=3.0.0",
+    "readerwriterlock>=1.0.9",
+    "pydantic>=2.0.0",
+    "websockets>=11.0",
+    "typer>=0.9.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.21.0",
+    "httpx>=0.24.0",
+    "locust>=2.15.0",
+]
+
+[project.scripts]
+hotswap = "hotswap.__main__:app"
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["hotswap*"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
